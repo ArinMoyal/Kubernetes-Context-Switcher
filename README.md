@@ -14,7 +14,10 @@ Created to avoid manually exporting environment variables and to ensure consiste
 1. Create a `contexts.txt` file in the same directory as the script:
 
 ```
-dev,staging,prod
+dev, development-aws-profile
+staging, staging
+prod, probably-a-different-aws-profile
+this-context-has-the-same-name-as-the-aws-profile
 ```
 
 2. Ensure your Kubernetes config files exist at:
@@ -23,19 +26,23 @@ dev,staging,prod
 ~/.kube-dev/config
 ~/.kube-staging/config
 ~/.kube-prod/config
+~/.kube-this-context-has-the-same-name-as-the-aws-profile/config
 ```
 
 3. Make sure corresponding AWS profiles exist in your AWS credentials file:
 
 ```ini
-[dev]
+[development-aws-profile]
 # Your dev credentials or SSO config
 
 [staging]
 # Your staging credentials or SSO config
 
-[prod]
+[probably-a-different-aws-profile]
 # Your production credentials or SSO config
+
+[this-context-has-the-same-name-as-the-aws-profile]
+# You get the idea ;)
 ```
 
 4. Source the script:
@@ -44,4 +51,4 @@ dev,staging,prod
 . kube-context-switcher.sh
 ```
 
-The script will update your current shell environment variables with the appropriate `KUBECONFIG` and `AWS_PROFILE`.
+The script will update your current shell's environment variables with the appropriate `KUBECONFIG` and `AWS_PROFILE` values. Happy Kubernetes-ing!
